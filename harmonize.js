@@ -1,10 +1,18 @@
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 var audioContext = null;
+var pitch = null;
+var analyzerNode = null;
+var buf = new Float32Array(1024);
+
 var musicBuffer = null;
+
+var frequencyElem = document.querySelector('.frequency').childNodes[0];
+
 
 window.onload = function() {
   audioContext = new AudioContext();
+  pitch = new PitchAnalyzer(44100);
   loadMusic('./music/find_your_soul.mp3');
 }
 
@@ -35,7 +43,27 @@ function getUserMedia(dictionary, callback) {
 
 function gotStream(stream) {
   var mediaStreamSource = audioContext.createMediaStreamSource(stream);
-  mediaStreamSource.connect(audioContext.destination);
+  analyzerNode = audioContext.createAnalyser();
+  mediaStreamSource.connect(analyzerNode);
+  getPitch();
+}
+
+function getPitch() {
+  analyzerNode.getFloatTimeDomainData(buf);
+  pitch.input(buf);
+  pitch.process();
+  var tone = pitch.findTone();
+  var freq = 0.0;
+  if (tone) {
+    freq = tone.freq;
+  }
+
+  frequencyElem.textContent = freq;
+
+  if (!window.requestAnimationFrame) {
+    window.requestAnimationFrame = window.webkitRequestAnimationFrame;
+  }
+  window.requestAnimationFrame(getPitch);
 }
 
 function error() {
