@@ -5,20 +5,20 @@ var FREQ_MIN = 20;
 var FREQ_MAX = 1000;
 
 var audioContext = null;
-var pitch = null;
 var analyzerNode = null;
 var buf = new Float32Array(1024);
+var pitch = null;
 
 var musicBuffer = null;
 
 var frequencyElem = document.querySelector('.frequency').childNodes[0];
 
 
-window.onload = function() {
+window.addEventListener('load', function() {
   audioContext = new AudioContext();
   pitch = new PitchAnalyzer(44100);
   loadMusic('./music/find_your_soul.mp3');
-}
+});
 
 function toggleLiveInput() {
   getUserMedia({
