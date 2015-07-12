@@ -10,6 +10,8 @@ var buf = new Float32Array(1024);
 var pitch = null;
 
 var musicBuffer = null;
+var musicSourceNode = null;
+var isPlayingMusic = false;
 
 var frequencyElem = document.querySelector('.frequency').childNodes[0];
 
@@ -89,9 +91,14 @@ function loadMusic(url) {
 }
 
 function togglePlayMusic() {
-  var source = audioContext.createBufferSource();
-  source.buffer = musicBuffer;
-  source.connect(audioContext.destination);
-  source.start(0);
+  if (isPlayingMusic) {
+    musicSourceNode.stop(0);
+  } else {
+    musicSourceNode = audioContext.createBufferSource();
+    musicSourceNode.buffer = musicBuffer;
+    musicSourceNode.connect(audioContext.destination);
+    musicSourceNode.start(0);
+  }
+  isPlayingMusic = !isPlayingMusic;
 }
 
