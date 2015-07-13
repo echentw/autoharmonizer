@@ -11,9 +11,24 @@
     <button class="calibrateButton" onclick="toggleCalibrate()">Calibrate</button>
     <button class="liveInputButton" onclick="toggleLiveInput()">Start</button>
 
-    <div class="frequency">0<span> Hz</span></div>
-    <div class="calibrate">Calibration counter: 300</div>
-    <div class="note">Your note: 50</div>
+    <div class="frequency-class">
+      <span>Frequency:</span>
+      <span class="frequency">0</span>
+      <span>Hz</div>
+    </div>
+    <div class="countdown-class">
+      <span>Calibration countdown:</span>
+      <span class="countdown">300</span>
+    </div>
+    <div class="calibrate-class">
+      <span>Calibrated frequency:</span>
+      <span class="calibrate">--</span>
+      <span>Hz</span>
+    </div>
+    <div class="note-class">
+      <span>Your note:</span>
+      <span class="note">50</span>
+    </div>
     <div id="chartContainer" style="height: 300px; width:100%;">
 
     <script src="js/helper.js"></script>

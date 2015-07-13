@@ -15,6 +15,7 @@ var musicSourceNode = null;
 var isPlayingMusic = false;
 
 var frequencyElem = document.querySelector('.frequency').childNodes[0];
+var countdownElem = document.querySelector('.countdown').childNodes[0];
 var calibrateElem = document.querySelector('.calibrate').childNodes[0];
 var noteElem = document.querySelector('.note').childNodes[0];
 
@@ -55,12 +56,12 @@ function gotCalibrateStream(stream) {
 
 function calibratePitch() {
   calibrateCountdown--;
-  calibrateElem.textContent = calibrateCountdown;
+  countdownElem.textContent = calibrateCountdown;
   if (calibrateCountdown < 0) {
     calibrateCountdown = CALIBRATE_TIME;
     calibratedFreq = extractDominantFrequency(calibrateFreqs);
-    calibrateElem.textContent =
-        "Calibrated frequency: " + Math.round(calibratedFreq) + " Hz";
+    countdownElem.textContent = CALIBRATE_TIME;
+    calibrateElem.textContent = Math.round(calibratedFreq);
     return;
   }
   analyzerNode.getFloatTimeDomainData(buf);
@@ -68,8 +69,7 @@ function calibratePitch() {
   pitch.process();
   var tone = pitch.findTone();
 
-  if (tone &&
-      tone.db > DB_THRESH &&
+  if (tone && tone.db > DB_THRESH &&
       tone.freq > FREQ_MIN &&
       tone.freq < FREQ_MAX) {
     frequencyElem.textContent = Math.round(tone.freq);

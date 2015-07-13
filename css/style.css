@@ -12,13 +12,13 @@ h2 {
   text-align: center;
 }
 
-.frequency, .calibrate {
+.frequency-class, .countdown-class, .calibrate-class {
   font-family: Arial;
   font-weight: bold;
   text-align: center;
 }
 
-.note {
+.note-class {
   font-family: Arial;
   font-weight: bold;
   text-align: center;
