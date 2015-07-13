@@ -1,8 +1,8 @@
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 var DB_THRESH = -20.0;
-var FREQ_MIN = 20;
-var FREQ_MAX = 1000;
+var FREQ_MIN = 60;
+var FREQ_MAX = 800;
 
 var audioContext = null;
 var analyzerNode = null;
@@ -60,12 +60,13 @@ function getPitch() {
   pitch.process();
   var tone = pitch.findTone();
 
-  if (tone) {
-    if (tone.db > DB_THRESH &&
-        tone.freq > FREQ_MIN &&
-        tone.freq < FREQ_MAX) {
-      frequencyElem.textContent = Math.round(tone.freq);
-    }
+  if (tone &&
+      tone.db > DB_THRESH &&
+      tone.freq > FREQ_MIN &&
+      tone.freq < FREQ_MAX) {
+    frequencyElem.textContent = Math.round(tone.freq);
+  } else {
+    frequencyElem.textContent = 0;
   }
 
   if (!window.requestAnimationFrame) {

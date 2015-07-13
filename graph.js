@@ -6,7 +6,7 @@ window.addEventListener('load', function () {
       text: "Live Frequency Data"
     },      
     data: [{
-      type: "line",
+      type: "scatter",
       dataPoints: datapts 
     }]
   });
