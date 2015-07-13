@@ -4,7 +4,18 @@ function extractDominantFrequency(freqs) {
   if (freqs.length == 0) {
     return null;
   }
+  var scores = getScores(freqs);
+  var maxScore = Math.max.apply(null, scores);
+  var bestFreqs = getBestFreqs(scores, freqs);
+  var geoMean = geometricMean(bestFreqs);
+  return geoMean;
+}
 
+function getNoteFromFreq(refNote, calibratedFreq, freq) {
+  return 50 + Math.round( Math.log(freq / calibratedFreq) / Math.log(a) );
+}
+
+function getScores(freqs) {
   var scores = [];
   for (var i = 0; i < freqs.length; ++i) {
     scores.push(0);
@@ -14,31 +25,29 @@ function extractDominantFrequency(freqs) {
       }
     }
   }
+  return scores;
+}
 
-  var maxScore = Math.max.apply(null, scores);
-
+function getBestFreqs(scores, freqs) {
   var bestFreqs = [];
   for (var i = 0; i < freqs.length; ++i) {
     if (scores[i] == maxScore) {
       bestFreqs.push(freqs[i]);
     }
   }
-
-  // compute geometric mean of bestFreqs
-  for (var i = 0; i < bestFreqs.length; ++i) {
-    bestFreqs[i] = Math.log(bestFreqs[i]);
-  }
-  var logMean = 0.0;
-  for (var i = 0; i < bestFreqs.length; ++i) {
-    logMean += bestFreqs[i];
-  }
-  logMean /= bestFreqs.length;
-  var geoMean = Math.exp(logMean);
-
-  return geoMean;
+  return bestFreqs;
 }
 
-function getNoteFromFreq(refNote, calibratedFreq, freq) {
-  return 50 + Math.round( Math.log(freq / calibratedFreq) / Math.log(a) );
+function geometricMean(a) {
+  for (var i = 0; i < a.length; ++i) {
+    a[i] = Math.log(a[i]);
+  }
+  var logMean = 0.0;
+  for (var i = 0; i < a.length; ++i) {
+    logMean += a[i];
+  }
+  logMean /= a.length;
+  var geoMean = Math.exp(logMean);
+  return geoMean;
 }
 
