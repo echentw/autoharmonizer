@@ -129,9 +129,6 @@ function getPitch() {
     frequencyElem.textContent = Math.round(tone.freq);
     noteElem.textContent =
         "Your note: " + getNoteFromFreq(refNote, calibratedFreq, tone.freq);
-    console.log(refNote);
-    console.log(calibratedFreq);
-    console.log(tone.freq);
   } else {
     frequencyElem.textContent = 0;
   }
