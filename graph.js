@@ -5,8 +5,15 @@ window.addEventListener('load', function () {
     title :{
       text: "Live Frequency Data"
     },      
+    axisX: {
+      title: "Time (s)"
+    },
+    axisY: {
+      title: "Frequency (Hz)"
+    },
     data: [{
       type: "scatter",
+      color: "#1b6611", // dark green
       dataPoints: datapts 
     }]
   });
