@@ -14,6 +14,7 @@ var musicBuffer = null;
 var musicSourceNode = null;
 var isPlayingMusic = false;
 
+var buttonElem = document.querySelector('.playMusicButton').childNodes[0];
 var frequencyElem = document.querySelector('.frequency').childNodes[0];
 var countdownElem = document.querySelector('.countdown').childNodes[0];
 var calibrateElem = document.querySelector('.calibrate').childNodes[0];
@@ -158,11 +159,13 @@ function loadMusic(url) {
 function togglePlayMusic() {
   if (isPlayingMusic) {
     musicSourceNode.stop(0);
+    buttonElem.textContent = "Play";
   } else {
     musicSourceNode = audioContext.createBufferSource();
     musicSourceNode.buffer = musicBuffer;
     musicSourceNode.connect(audioContext.destination);
     musicSourceNode.start(0);
+    buttonElem.textContent = "Stop";
   }
   isPlayingMusic = !isPlayingMusic;
 }
