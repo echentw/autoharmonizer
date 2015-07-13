@@ -1,14 +1,15 @@
 <!DOCTYPE HTML>
 <html>
   <head>
+    <link rel="stylesheet" href="style.css">
     <title>Autoharmonizer</title>
   </head>
   <body>
     <h2>Autoharmonizer</h2>
 
-    <button onclick="togglePlayMusic()">Play</button>
-    <button onclick="toggleCalibrate()">Calibrate</button>
-    <button onclick="toggleLiveInput()">Start</button>
+    <button class="playMusicButton" onclick="togglePlayMusic()">Play</button>
+    <button class="calibrateButton" onclick="toggleCalibrate()">Calibrate</button>
+    <button class="liveInputButton" onclick="toggleLiveInput()">Start</button>
 
     <div class="frequency">0<span> Hz</span></div>
     <div class="calibrate">Calibration counter: 300</div>
