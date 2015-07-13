@@ -16,11 +16,14 @@ var isPlayingMusic = false;
 
 var frequencyElem = document.querySelector('.frequency').childNodes[0];
 var calibrateElem = document.querySelector('.calibrate').childNodes[0];
+var noteElem = document.querySelector('.note').childNodes[0];
 
 var calibrateFreqs = [];
 var calibrate = false;
 var calibrateCountdown = CALIBRATE_TIME;
 var calibratedFreq = null;
+
+var refNote = 50;
 
 
 window.addEventListener('load', function() {
@@ -124,6 +127,11 @@ function getPitch() {
       tone.freq > FREQ_MIN &&
       tone.freq < FREQ_MAX) {
     frequencyElem.textContent = Math.round(tone.freq);
+    noteElem.textContent =
+        "Your note: " + getNoteFromFreq(refNote, calibratedFreq, tone.freq);
+    console.log(refNote);
+    console.log(calibratedFreq);
+    console.log(tone.freq);
   } else {
     frequencyElem.textContent = 0;
   }

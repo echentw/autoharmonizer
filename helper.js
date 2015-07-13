@@ -1,3 +1,5 @@
+var a = Math.pow(2.0, 1.0/12) // 12th root of 2
+
 function extractDominantFrequency(freqs) {
   if (freqs.length == 0) {
     return null;
@@ -34,5 +36,9 @@ function extractDominantFrequency(freqs) {
   var geoMean = Math.exp(logMean);
 
   return geoMean;
+}
+
+function getNoteFromFreq(refNote, calibratedFreq, freq) {
+  return 50 + Math.round( Math.log(freq / calibratedFreq) / Math.log(a) );
 }
 
