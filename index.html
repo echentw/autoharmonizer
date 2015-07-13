@@ -7,11 +7,14 @@
     <h2>Autoharmonizer</h2>
 
     <button onclick="togglePlayMusic()">Play</button>
+    <button onclick="toggleCalibrate()">Calibrate</button>
     <button onclick="toggleLiveInput()">Start</button>
 
     <div class="frequency">0</div>
+    <div class="calibrate">Calibration counter: 300</div>
     <div id="chartContainer" style="height: 300px; width:100%;">
 
+    <script src="helper.js"></script>
     <script src="harmonize.js"></script>
     <script src="graph.js"></script>
     <script src="vendor/pitch.js/src/pitch.js"></script>
