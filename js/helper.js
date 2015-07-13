@@ -6,7 +6,7 @@ function extractDominantFrequency(freqs) {
   }
   var scores = getScores(freqs);
   var maxScore = Math.max.apply(null, scores);
-  var bestFreqs = getBestFreqs(scores, freqs);
+  var bestFreqs = getBestFreqs(scores, freqs, maxScore);
   var geoMean = geometricMean(bestFreqs);
   return geoMean;
 }
@@ -28,7 +28,7 @@ function getScores(freqs) {
   return scores;
 }
 
-function getBestFreqs(scores, freqs) {
+function getBestFreqs(scores, freqs, maxScore) {
   var bestFreqs = [];
   for (var i = 0; i < freqs.length; ++i) {
     if (scores[i] == maxScore) {
