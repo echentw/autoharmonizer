@@ -16,7 +16,7 @@ window.addEventListener('load', function () {
       {
         type: "scatter",
         markerType: "triangle",
-        color: "#78eded",
+        color: "#84713e",
         dataPoints: rawpts,
         showInLegend: true,
         legendText: "raw"
