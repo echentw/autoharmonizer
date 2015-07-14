@@ -30,7 +30,6 @@ window.addEventListener('load', function() {
 
 function toggleLiveInput() {
   stop = !stop;
-  console.log(stop);
   if (!stop) {
     getUserMedia({
       "audio": {
