@@ -139,8 +139,7 @@ function getPitch() {
   freqs.shift();
   var fundFreq = extractFundamentalFrequency(freqs);
   frequencyElem.textContent = Math.round(fundFreq);
-  noteElem.textContent =
-      "Your note: " + getNoteFromFreq(refNote, calibratedFreq, fundFreq);
+  noteElem.textContent = getNoteFromFreq(refNote, calibratedFreq, fundFreq);
 
   if (!window.requestAnimationFrame) {
     window.requestAnimationFrame = window.webkitRequestAnimationFrame;
