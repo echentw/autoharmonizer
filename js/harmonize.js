@@ -174,6 +174,7 @@ function togglePlayMusic() {
   } else {
     musicSourceNode = audioContext.createBufferSource();
     musicSourceNode.buffer = musicBuffer;
+    musicSourceNode.loop = true;
     musicSourceNode.connect(audioContext.destination);
     musicSourceNode.start(0);
     buttonElem.textContent = "Stop";
