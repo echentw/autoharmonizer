@@ -27,6 +27,11 @@ var calibratedFreq = null;
 
 var refNote = 50;
 
+var freqs = [];
+for (var i = 0; i < 20; ++i) {
+  freqs.push(0);
+}
+
 
 window.addEventListener('load', function() {
   audioContext = new AudioContext();
@@ -123,16 +128,19 @@ function getPitch() {
   pitch.process();
   var tone = pitch.findTone();
 
+  var freq = 0;
   if (tone &&
       tone.db > DB_THRESH &&
       tone.freq > FREQ_MIN &&
       tone.freq < FREQ_MAX) {
-    frequencyElem.textContent = Math.round(tone.freq);
-    noteElem.textContent =
-        "Your note: " + getNoteFromFreq(refNote, calibratedFreq, tone.freq);
-  } else {
-    frequencyElem.textContent = 0;
+    freq = Math.round(tone.freq);
   }
+  freqs.push(freq);
+  freqs.shift();
+  var fundFreq = extractFundamentalFrequency(freqs);
+  frequencyElem.textContent = Math.round(fundFreq);
+  noteElem.textContent =
+      "Your note: " + getNoteFromFreq(refNote, calibratedFreq, fundFreq);
 
   if (!window.requestAnimationFrame) {
     window.requestAnimationFrame = window.webkitRequestAnimationFrame;
