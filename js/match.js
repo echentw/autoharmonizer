@@ -2,21 +2,27 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 var sourceNode = null;
 
+var doMatch = false;
+
 function toggleMatchPitch() {
-  sourceNode = audioContext.createOscillator();
-  sourceNode.connect(audioContext.destination);
-  sourceNode.start(0);
-  getUserMedia({
-    "audio": {
-      "mandatory": {
-        "googEchoCancellation": "false",
-        "googAutoGainControl": "false",
-        "googNoiseSuppression": "false",
-        "googHighpassFilter": "false"
+  doMatch = !doMatch;
+  if (doMatch) {
+    sourceNode = audioContext.createOscillator();
+    sourceNode.connect(audioContext.destination);
+    sourceNode.start(0);
+
+    getUserMedia({
+      "audio": {
+        "mandatory": {
+          "googEchoCancellation": "false",
+          "googAutoGainControl": "false",
+          "googNoiseSuppression": "false",
+          "googHighpassFilter": "false"
+        },
+        "optional": []
       },
-      "optional": []
-    },
-  }, matchGotStream);
+    }, matchGotStream);
+  }
 }
 
 function matchGotStream(stream) {
@@ -27,6 +33,13 @@ function matchGotStream(stream) {
 }
 
 function matchPitch() {
+  if (!doMatch) {
+    sourceNode.stop(0);
+    frequencyElem.textContent = 0;
+    rawFreqElem.textContent = 0;
+    noteElem.textContent = "--";
+    return;
+  }
   analyzerNode.getFloatTimeDomainData(buf);
   pitch.input(buf);
   pitch.process();

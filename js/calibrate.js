@@ -9,19 +9,24 @@ var countdownElem = document.querySelector('.countdown').childNodes[0];
 var calibrateElem = document.querySelector('.calibrate').childNodes[0];
 var rawFreqElem = document.querySelector('.rawFreq').childNodes[0];
 
+var stopCalibrate = true;
+
 
 function toggleCalibrate() {
-  getUserMedia({
-    "audio": {
-      "mandatory": {
-        "googEchoCancellation": "false",
-        "googAutoGainControl": "false",
-        "googNoiseSuppression": "false",
-        "googHighpassFilter": "false"
+  stopCalibrate = !stopCalibrate;
+  if (!stopCalibrate) {
+    getUserMedia({
+      "audio": {
+        "mandatory": {
+          "googEchoCancellation": "false",
+          "googAutoGainControl": "false",
+          "googNoiseSuppression": "false",
+          "googHighpassFilter": "false"
+        },
+        "optional": []
       },  
-      "optional": []
-    },  
-  }, gotCalibrateStream);
+    }, gotCalibrateStream);
+  }
 }
 
 function gotCalibrateStream(stream) {
@@ -32,15 +37,20 @@ function gotCalibrateStream(stream) {
 }
 
 function calibratePitch() {
-  calibrateCountdown--;
-  countdownElem.textContent = calibrateCountdown;
-  if (calibrateCountdown < 0) {
+  if (stopCalibrate) {
+    rawFreqElem.textContent = 0;
     calibrateCountdown = CALIBRATE_TIME;
     calibratedFreq = extractDominantFrequency(calibrateFreqs);
     countdownElem.textContent = CALIBRATE_TIME;
     calibrateElem.textContent = Math.round(calibratedFreq);
     return;
   }
+  calibrateCountdown--;
+  countdownElem.textContent = calibrateCountdown;
+  if (calibrateCountdown < 0) {
+    stopCalibrate = true;
+  }
+
   analyzerNode.getFloatTimeDomainData(buf);
   pitch.input(buf);
   pitch.process();
