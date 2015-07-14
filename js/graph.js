@@ -1,6 +1,7 @@
 window.addEventListener('load', function () {
   var rawpts = [];
   var datapts = [];
+  var harmpts = [];
 
   var chart = new CanvasJS.Chart("chartContainer",{
     title :{
@@ -27,6 +28,13 @@ window.addEventListener('load', function () {
         dataPoints: datapts,
         showInLegend: true,
         legendText: "calibrated"
+      },
+      {
+        type: "line",
+        color: "#71e8e8", // light blue
+        dataPoints: harmpts,
+        showInLegend: true,
+        legendText: "harmony"
       }
     ]
   });
@@ -44,6 +52,8 @@ window.addEventListener('load', function () {
           document.querySelector('.rawFreq').childNodes[0].textContent);
       freqVal = Number(
           document.querySelector('.frequency').childNodes[0].textContent);
+      harmonyVal = Number(
+          document.querySelector('.harmony').childNodes[0].textContent);
       rawpts.push({
         x: time,
         y: rawFreqVal
@@ -52,11 +62,16 @@ window.addEventListener('load', function () {
         x: time,
         y: freqVal
       });
+      harmpts.push({
+        x: time,
+        y: harmonyVal
+      });
       time += 0.02;
     }
     if (datapts.length > dataLength) {
       rawpts.shift();
       datapts.shift();        
+      harmpts.shift();
     }
     
     chart.render();   
