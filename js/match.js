@@ -9,6 +9,7 @@ function toggleMatchPitch() {
   if (doMatch) {
     sourceNode = audioContext.createOscillator();
     sourceNode.connect(audioContext.destination);
+    sourceNode.frequency.value = 0;
     sourceNode.start(0);
 
     getUserMedia({
