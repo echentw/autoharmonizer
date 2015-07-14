@@ -80,11 +80,9 @@ function calibratePitch() {
       tone.freq > FREQ_MIN &&
       tone.freq < FREQ_MAX) {
     rawFreqElem.textContent = Math.round(tone.freq);
-//    frequencyElem.textContent = Math.round(tone.freq);
     calibrateFreqs.push(tone.freq);
   } else {
     rawFreqElem.textContent = 0;
-//    frequencyElem.textContent = 0;
   }
 
   if (!window.requestAnimationFrame) {
