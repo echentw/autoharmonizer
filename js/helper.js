@@ -40,6 +40,10 @@ function getNoteFromFreq(refNote, calibratedFreq, freq) {
   return 50 + Math.round( Math.log(freq / calibratedFreq) / Math.log(a) );
 }
 
+function getFreqFromNote(refNote, calibratedFreq, note) {
+  return calibratedFreq * Math.pow(a, note - refNote);
+}
+
 function getScores(freqs) {
   var scores = [];
   for (var i = 0; i < freqs.length; ++i) {

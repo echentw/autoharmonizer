@@ -12,11 +12,6 @@ h2 {
   text-align: center;
 }
 
-.buttons {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
 .rawFreq-class, .frequency-class, .countdown-class, .calibrate-class {
   font-family: Arial;
   font-weight: bold;
@@ -30,7 +25,15 @@ h2 {
   margin-bottom: 10px;
 }
 
-.playMusicButton, .calibrateButton, .liveInputButton {
+.buttons {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.playMusicButton,
+.calibrateButton,
+.liveInputButton,
+.matchButton {
   -moz-box-shadow: 0px 1px 0px 0px #fff6af;
   -webkit-box-shadow: 0px 1px 0px 0px #fff6af;
   box-shadow: 0px 1px 0px 0px #fff6af;
@@ -57,7 +60,10 @@ h2 {
   text-shadow:0px 1px 0px #ffee66;
 }
 
-.playMusicButton:hover, .calibrateButton:hover, .liveInputButton:hover {
+.playMusicButton:hover,
+.calibrateButton:hover,
+.liveInputButton:hover,
+.matchButton:hover {
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));
   background:-moz-linear-gradient(top, #ffab23 5%, #ffec64 100%);
   background:-webkit-linear-gradient(top, #ffab23 5%, #ffec64 100%);
@@ -68,7 +74,10 @@ h2 {
   background-color:#ffab23;
 }
 
-.playMusicButton:active, .calibrateButton:active, .liveInputButton:active {
+.playMusicButton:active,
+.calibrateButton:active,
+.liveInputButton:active,
+.matchButton:active {
   position:relative;
   top:1px;
 }
