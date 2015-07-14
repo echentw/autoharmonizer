@@ -17,7 +17,7 @@ h2 {
   margin-bottom: 10px;
 }
 
-.frequency-class, .countdown-class, .calibrate-class {
+.rawFreq-class, .frequency-class, .countdown-class, .calibrate-class {
   font-family: Arial;
   font-weight: bold;
   text-align: center;

@@ -1,4 +1,5 @@
 window.addEventListener('load', function () {
+  var rawpts = [];
   var datapts = [];
 
   var chart = new CanvasJS.Chart("chartContainer",{
@@ -11,11 +12,23 @@ window.addEventListener('load', function () {
     axisY: {
       title: "Frequency (Hz)"
     },
-    data: [{
-      type: "scatter",
-      color: "#1b6611", // dark green
-      dataPoints: datapts 
-    }]
+    data: [
+      {
+        type: "scatter",
+        markerType: "triangle",
+        color: "#78eded",
+        dataPoints: rawpts,
+        showInLegend: true,
+        legendText: "raw"
+      },
+      {
+        type: "line",
+        color: "#1b6611", // dark green
+        dataPoints: datapts,
+        showInLegend: true,
+        legendText: "calibrated"
+      }
+    ]
   });
 
   var time = 0;
@@ -27,8 +40,14 @@ window.addEventListener('load', function () {
     count = count || 1;
 
     for (var i = 0; i < count; i++) { 
+      rawFreqVal = Number(
+          document.querySelector('.rawFreq').childNodes[0].textContent);
       freqVal = Number(
           document.querySelector('.frequency').childNodes[0].textContent);
+      rawpts.push({
+        x: time,
+        y: rawFreqVal
+      });
       datapts.push({
         x: time,
         y: freqVal
@@ -36,6 +55,7 @@ window.addEventListener('load', function () {
       time += 0.02;
     }
     if (datapts.length > dataLength) {
+      rawpts.shift();
       datapts.shift();        
     }
     

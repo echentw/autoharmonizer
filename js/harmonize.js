@@ -15,6 +15,7 @@ var musicSourceNode = null;
 var isPlayingMusic = false;
 
 var buttonElem = document.querySelector('.playMusicButton').childNodes[0];
+var rawFreqElem = document.querySelector('.rawFreq').childNodes[0];
 var frequencyElem = document.querySelector('.frequency').childNodes[0];
 var countdownElem = document.querySelector('.countdown').childNodes[0];
 var calibrateElem = document.querySelector('.calibrate').childNodes[0];
@@ -78,10 +79,12 @@ function calibratePitch() {
   if (tone && tone.db > DB_THRESH &&
       tone.freq > FREQ_MIN &&
       tone.freq < FREQ_MAX) {
-    frequencyElem.textContent = Math.round(tone.freq);
+    rawFreqElem.textContent = Math.round(tone.freq);
+//    frequencyElem.textContent = Math.round(tone.freq);
     calibrateFreqs.push(tone.freq);
   } else {
-    frequencyElem.textContent = 0;
+    rawFreqElem.textContent = 0;
+//    frequencyElem.textContent = 0;
   }
 
   if (!window.requestAnimationFrame) {
@@ -135,6 +138,7 @@ function getPitch() {
       tone.freq < FREQ_MAX) {
     freq = Math.round(tone.freq);
   }
+  rawFreqElem.textContent = freq;
   freqs.push(freq);
   freqs.shift();
   var fundFreq = extractFundamentalFrequency(freqs);
