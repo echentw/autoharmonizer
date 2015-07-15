@@ -64,16 +64,12 @@ function harmonizePitch() {
   rawFreqElem.textContent = freq;
   freqs.push(freq);
   freqs.shift();
+
   var fundFreq = extractFundamentalFrequency(freqs);
   frequencyElem.textContent = Math.round(fundFreq);
 
   var note = getNoteFromFreq(refNote, calibratedFreq, fundFreq);
   noteElem.textContent = note;
-
-  var adjustedFreq = getFreqFromNote(refNote, calibratedFreq, note);
-  if (!adjustedFreq) {
-    adjustedFreq = 0;
-  }
 
   var harmony = Math.round(getHarmonyFrequency(fundFreq));
   harmonyElem.textContent = harmony;
