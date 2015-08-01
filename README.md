@@ -1,4 +1,5 @@
-# autoharmonizer
+Autoharmonizer
+==============
 
 I'm working on an app to automatically harmonize with your voice. For now, you can play with it by cloning the repo and serving it on localhost.
 
