@@ -1,0 +1,6 @@
+[submodule "vendor/fft.js"]
+	path = vendor/fft.js
+	url = https://github.com/JensNockert/fft.js
+[submodule "vendor/pitch.js"]
+	path = vendor/pitch.js
+	url = https://github.com/audiocogs/pitch.js
